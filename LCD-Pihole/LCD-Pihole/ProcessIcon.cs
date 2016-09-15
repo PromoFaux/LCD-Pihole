@@ -6,7 +6,7 @@ using System.Net;
 using System.Windows.Forms;
 using LCDPihole;
 using LogiFrame;
-using Timer = System.Threading.Timer;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -18,7 +18,7 @@ namespace LCDPlay
     class ProcessIcon : IDisposable
     {
 
-        private Timer t;
+      
 
 
         /// <summary>
@@ -49,7 +49,8 @@ namespace LCDPlay
             // Attach a context menu.
             ni.ContextMenuStrip = new ContextMenus().Create();
 
-            PiHoleApi p = new PiHoleApi();
+            var p = new PiHoleApi();
+            p.WaitForClose();
           
 
         }
