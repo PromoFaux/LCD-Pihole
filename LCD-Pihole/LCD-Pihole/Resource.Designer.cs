@@ -71,22 +71,22 @@ namespace LCDPihole {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Bitmap favicon {
+        internal static System.Drawing.Icon RedBerry {
             get {
-                object obj = ResourceManager.GetObject("favicon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("RedBerry", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon favicon_pIH_icon {
+        internal static System.Drawing.Bitmap RedBerry1 {
             get {
-                object obj = ResourceManager.GetObject("favicon_pIH_icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("RedBerry1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

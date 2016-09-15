@@ -42,7 +42,7 @@ namespace LCDPlay
         {
             // Put the icon in the system tray and allow it react to mouse clicks.			
 
-            ni.Icon = Resource.favicon_pIH_icon;
+            ni.Icon = Resource.RedBerry;
             ni.Text = "Pi-hole stats for Logitech LCDs!";
             ni.Visible = true;
 
