@@ -43,35 +43,25 @@ namespace LCDPihole
             _lblTotDomains = new LCDLabel
             {
                 Font = PixelFonts.Small,
-                AutoSize = true,
-                Top = 0,
-                Left = 0,
-                Width = (LCDApp.DefaultSize.Width / 2) - 1
+                AutoSize = true
 
             };
             _lblQueriesToday = new LCDLabel
             {
                 Font = PixelFonts.Small,
-                AutoSize = true,
-                Top = LCDApp.DefaultSize.Height / 2,
-                Left = 0
+                AutoSize = true
 
             };
             _lblBlockedToday = new LCDLabel
             {
                 Font = PixelFonts.Small,
-                AutoSize = true,
-                Top = 0,
-                Left = LCDApp.DefaultSize.Width / 2
+                AutoSize = true
 
             };
             _lblPercToday = new LCDLabel
             {
                 Font = PixelFonts.Small,
-                AutoSize = true,
-                Top = LCDApp.DefaultSize.Height / 2,
-                Left = LCDApp.DefaultSize.Width / 2
-
+                AutoSize = true
             };
 
             // Create an app instance.
@@ -85,7 +75,7 @@ namespace LCDPihole
             _app.Controls.Add(_lblBlockedToday);
             _app.Controls.Add(_lblPercToday);
 
-           UpdateVisibility();
+            UpdateVisibility();
 
             UpdateStats();
 
@@ -113,18 +103,44 @@ namespace LCDPihole
 
                 var j = JObject.Parse(json);
 
-                var DomainsBlocked = j["domains_being_blocked"].ToString();
-                var QueriesToday = j["dns_queries_today"].ToString();
-                var BlockedToday = j["ads_blocked_today"].ToString();
-                var PercToday = Math.Round(Convert.ToDecimal(j["ads_percentage_today"].ToString()), 2).ToString();
+                var domainsBlocked = j["domains_being_blocked"].ToString();
+                var queriesToday = j["dns_queries_today"].ToString();
+                var blockedToday = j["ads_blocked_today"].ToString();
+                var percToday = Math.Round(Convert.ToDecimal(j["ads_percentage_today"].ToString()), 2).ToString();
+               
+                //Set Labels and centre top line of each with bottom line.
+                _lblTotDomains.Text = $"{CenterIt(domainsBlocked,15)}\nDomains Blocked";
+                _lblBlockedToday.Text = $"{CenterIt(blockedToday,13)}\nBlocked Today";
+                _lblQueriesToday.Text = $"{CenterIt(queriesToday,13)}\nQueries Today";
+                _lblPercToday.Text = $"{CenterIt($"{percToday}%",10)}\nPercentage";
 
-                _lblTotDomains.Text = $"{DomainsBlocked}\nDomains Blocked";
-                _lblBlockedToday.Text = $"{BlockedToday}\nBlocked Today";
-                _lblQueriesToday.Text = $"{QueriesToday}\nQueries Today";
-                _lblPercToday.Text = $"{PercToday}%\nPercentage";
+                //center labels horizontally
+                _lblTotDomains.Left = (LCDApp.DefaultSize.Width / 4) - (_lblTotDomains.Width / 2);
+                _lblBlockedToday.Left = ((LCDApp.DefaultSize.Width / 4) * 3) - _lblBlockedToday.Width / 2;
+                _lblQueriesToday.Left = (LCDApp.DefaultSize.Width / 4) - (_lblQueriesToday.Width / 2);
+                _lblPercToday.Left = ((LCDApp.DefaultSize.Width / 4) * 3) - _lblPercToday.Width / 2;
+
+                //center labels vertically
+                _lblTotDomains.Top = (LCDApp.DefaultSize.Height / 4) - (_lblTotDomains.Height / 2);
+                _lblBlockedToday.Top = (LCDApp.DefaultSize.Height / 4) - (_lblBlockedToday.Height / 2);
+                _lblQueriesToday.Top = ((LCDApp.DefaultSize.Height / 4) * 3) - _lblQueriesToday.Height / 2;
+                _lblPercToday.Top = ((LCDApp.DefaultSize.Height / 4) * 3) - _lblPercToday.Height / 2;
+
             }
-
             
+        }
+
+        /// <summary>
+        /// Pad left and right to given length to center-justify string.
+        /// </summary>
+        /// <param name="inStr">String you want to center</param>
+        /// <param name="length">Length of new string</param>
+        /// <returns></returns>
+        public string CenterIt(string inStr, int length)
+        {
+            var spaces = length - inStr.Length;
+            var padLeft = spaces / 2 + inStr.Length;
+            return inStr.PadLeft(padLeft).PadRight(length);
         }
 
         private void TimerCallback(object o)

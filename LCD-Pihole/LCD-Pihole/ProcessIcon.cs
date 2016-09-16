@@ -45,19 +45,16 @@ namespace LCDPlay
             ni.Icon = Resource.RedBerry;
             ni.Text = "Pi-hole stats for Logitech LCDs!";
             ni.Visible = true;
-
+            
             // Attach a context menu.
-            ni.ContextMenuStrip = new ContextMenus().Create();
+            
 
             var p = new PiHoleApi();
-            p.WaitForClose();
-          
+            ni.ContextMenuStrip = new ContextMenus().Create();
+            //  p.WaitForClose();
+
 
         }
-
-
-
-
 
 
         /// <summary>
